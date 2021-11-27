@@ -57,18 +57,15 @@ export class SelectorPageComponent implements OnInit {
         this.cargando=true;
        // this.paises=[];
       }),
-      switchMap(codigo =>this.paisService.getPaisesxCodigo(codigo) )
+      switchMap(codigo =>this.paisService.getPaisesxCodigo(codigo) ),
+      switchMap(pais => this.paisService.getPaisesxCodigos(pais![0].borders))
     )
-    .subscribe( pais => {
-    
-      if(pais){
-        this.fronteras=pais[0].borders;
-
-      }
+    .subscribe( paises => {
+      console.log("paises frontera:"+ paises)    
+      this.fronteras=paises;
       this.cargando=false;
     })
-      
-    
+
 
   }
 
